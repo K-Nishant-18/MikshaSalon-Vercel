@@ -1,0 +1,224 @@
+🌟 THE ULTIMATE WEBSITE PLAN — MISHKA TATTOO & BEAUTY SALON
+
+Below is the final, polished, modern, high-end version of the website you can proudly launch.
+
+🖤 1. Brand Identity (High-End & Modern)
+Brand Mood:
+
+Luxury • Creative • Artistic • Soft feminine blend
+
+Color Palette:
+
+Black (#0E0E0E) → tattoo studio vibe
+
+Champagne Gold (#D8C18F) → premium touch
+
+Rose Nude (#F7E8E1) → beauty salon feel
+
+Pure White (#FFFFFF) → clean minimalism
+
+Ink Grey (#444444) → text tone
+
+Design Style:
+
+Glass morphism
+
+Neon glow + gold accent
+
+Smooth micro animations
+
+Parallax scrolling
+
+Soft hover effects
+
+Scroll-triggered fade-in sections
+
+This makes it look 2025-level premium.
+
+🏠 2. Homepage — Ultimate Modern Layout
+🎥 Hero Section (Full-screen video)
+
+Background: A cinematic video montage
+
+Tattoo needle movement (macro shot)
+
+Woman getting makeup
+
+Artist sketching tattoo
+
+Hair styling slow-motion
+
+Headline (big, bold, modern):
+
+Art. Beauty. Identity. Perfected At MISHKA.
+
+Subline:
+
+Tattoos that speak. Beauty that shines.
+
+Buttons (glassy style):
+
+Book Appointment
+
+Explore Gallery
+
+Floating elements:
+
+Floating gold sparkles
+
+Subtle neon outlines of tattoo designs
+
+🖌 3. The MISHKA Experience (Premium Intro)
+
+Split screen animation:
+Left: Tattoo studio
+Right: Beauty salon
+
+Text:
+
+At MISHKA Tattoo & Beauty Salon, we blend artistic mastery with beauty expertise.
+A space where creativity meets confidence.
+
+💉 4. Tattoo Section (Super Modern UI)
+⭐ Features:
+
+Slider that reveals before → after tattoos
+
+3D tattoo previews
+
+Tattoo categories with animated icons
+
+Tattoo Services Grid:
+
+Minimal Line Tattoos
+
+Fine Line
+
+Mandala
+
+Realism Portraits
+
+Cover-ups
+
+Brush/Ink art
+
+Color Tattoos
+
+Custom Hand-drawn Designs
+
+Highlight:
+
+100% Hygiene Guarantee
+Single-use needles • Premium inks • Certified artists
+
+Tattoo Artist Spotlight (Cinematic Animation)
+
+Photo fades in like a magazine feature.
+
+💄 5. Beauty Salon Section (Soft, Feminine, Modern)
+Glass Card Services:
+
+Hair Cutting & Styling
+
+Hair Color, Keratin, Smoothening
+
+HD Makeup (Party/Bridal)
+
+Nail Extensions
+
+Skin Treatments
+
+Eyelash Extensions
+
+Special Section:
+“Look Good • Feel Good • Own Your Glow”
+
+Soft rose-nude theme with golden waves.
+
+📸 6. Gallery (Most Important Section)
+
+The gallery should feel PREMIUM.
+
+Dynamic Gallery Types:
+
+Masonry layout
+
+Hover zoom
+
+Lightbox fullscreen view
+
+Filter: Tattoos / Makeup / Nails / Hair
+
+Scrolling Tattoo Wall:
+
+As you scroll, tattoos appear like sliding photo strips.
+
+💰 7. Pricing (Transparent + Premium Look)
+
+Use animated tabs:
+
+Tattoos
+
+Minimal – ₹799
+
+Small – ₹1499
+
+Medium – ₹2499
+
+Custom – quote
+
+Beauty Services
+
+Haircut – ₹299
+
+Facial – ₹699
+
+HD Makeup – ₹2999
+
+Bridal Makeup – ₹6999
+
+Use soft glow borders.
+
+🧴 8. Hygiene & Safety (Build Trust)
+
+Display icons + a short video:
+
+Single-use needles
+
+Autoclave sterilization
+
+Premium imported inks
+
+Patch test available
+
+Dermat-safe products
+
+⭐ 9. Testimonials (Animated Carousel)
+
+Client photo + short review:
+
+“Best tattoo experience of my life!”
+“Makeup was flawless and long-lasting.”
+
+📍 10. Contact + Booking (Highly Useful)
+Smart Booking System:
+
+Users can pick:
+
+Tattoo / Beauty
+
+Service type
+
+Artist
+
+Date & time
+
+Upload tattoo reference image
+
+Integrated WhatsApp:
+Floating WhatsApp button always visible.
+
+
+
+
+I want a popup on home page in starting to select a language- English or Bangla. I want this site to be in both language. I want amazing animations and effects. 
