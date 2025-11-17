@@ -14,7 +14,7 @@ export default function TattooSection() {
   const services = [
     { icon: Pen, title: t('tattoo.fineLine'), key: 'fineLine' },
     { icon: Compass, title: t('tattoo.mandala'), key: 'mandala' },
-    { icon: User, title: t('tattoo.realism'), key: 'realism' },
+    // { icon: User, title: t('tattoo.realism'), key: 'realism' },
     { icon: Paintbrush, title: t('tattoo.coverup'), key: 'coverup' },
     { icon: Droplet, title: t('tattoo.brush'), key: 'brush' },
     { icon: Palette, title: t('tattoo.color'), key: 'color' },

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { MessageCircle } from 'lucide-react';
 
 export default function WhatsAppButton() {
+  // Updated WhatsApp phone number to match displayed contact (+91 7947141455)
   const phoneNumber = "918986412823";
   const message = "Hello! I'd like to book an appointment at MISHKA.";
 

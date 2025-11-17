@@ -13,7 +13,7 @@ export default function HygieneSection() {
     { icon: Syringe, text: t('hygiene.needles') },
     { icon: Zap, text: t('hygiene.autoclave') },
     { icon: Droplet, text: t('hygiene.inks') },
-    { icon: TestTube, text: t('hygiene.patch') },
+    // { icon: TestTube, text: t('hygiene.patch') },
     { icon: Shield, text: t('hygiene.dermat') }
   ];
 

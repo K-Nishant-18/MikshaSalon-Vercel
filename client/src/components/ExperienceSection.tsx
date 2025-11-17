@@ -50,7 +50,10 @@ export default function ExperienceSection() {
         transition={{ duration: 0.8, delay: 0.4 }}
         className="absolute inset-0 flex items-center justify-center p-4"
       >
-        <div className="glass-effect border border-gold rounded-lg p-8 md:p-12 max-w-3xl mx-auto text-center">
+        <div
+          className="glass-effect border border-gold rounded-lg p-8 md:p-12 max-w-3xl mx-auto text-center"
+          style={{ backgroundImage: 'linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.35) 50%, rgba(255,255,255,0.04) 100%)' }}
+        >
           <h2 className="text-3xl md:text-5xl font-serif mb-6 text-white" data-testid="text-experience-title">
             {t('experience.title')}
           </h2>

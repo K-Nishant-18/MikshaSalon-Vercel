@@ -157,8 +157,8 @@ export default function BookingSection() {
                 <div className="flex items-start gap-4">
                   <MapPin className="w-6 h-6 text-gold flex-shrink-0 mt-1" />
                   <div>
-                    <p className="font-semibold text-white">Address</p>
-                    <p className="text-white/80">123 Park Street, Kolkata</p>
+                    <p className="font-semibold text-white">{t('booking.address') ? t('booking.contact') : 'Address'}</p>
+                    <p className="text-white/80">{t('booking.address')}</p>
                   </div>
                 </div>
 
@@ -180,7 +180,7 @@ export default function BookingSection() {
 
                 <div className="aspect-video bg-muted rounded-lg overflow-hidden mt-6">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.0976866303754!2d88.35036!3d22.54856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0277b0f7a4f3fb%3A0x9c7b8e1f4c8d8e1f!2sPark%20Street%2C%20Kolkata!5e0!3m2!1sen!2sin!4v1234567890"
+                    src="https://www.google.com/maps?q=BLOCK%20B%2C%20Near%20Mollargate%20Kashturi%20Das%20Hospital%2C%20MAHESHTALA%2C%20Santoshpur%20Maheshtala-700142&output=embed"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}

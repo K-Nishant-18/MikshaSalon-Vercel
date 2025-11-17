@@ -4,7 +4,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Globe } from 'lucide-react';
 
-export default function LanguageSelector() {
+type LanguageSelectorProps = {
+  /** When true the toggle button will be rendered inline (no fixed positioning) so it can live inside a navbar */
+  inline?: boolean;
+  className?: string;
+};
+
+export default function LanguageSelector({ inline = false, className = 'border border-gold text-white' }: LanguageSelectorProps) {
   const [showPopup, setShowPopup] = useState(false);
   const { i18n } = useTranslation();
 
@@ -80,7 +86,7 @@ export default function LanguageSelector() {
         onClick={toggleLanguage}
         variant="ghost"
         size="icon"
-        className="fixed top-4 right-4 z-40"
+        className={inline ? `z-40 ${className}` : `fixed top-4 right-4 z-40 ${className}`}
         data-testid="button-toggle-language"
       >
         <Globe className="w-5 h-5" />

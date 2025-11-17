@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { I18nextProvider } from 'react-i18next';
 import i18n from '@/lib/i18n';
-import LanguageSelector from '@/components/LanguageSelector';
+import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import ExperienceSection from '@/components/ExperienceSection';
 import TattooSection from '@/components/TattooSection';
@@ -20,8 +20,8 @@ export default function Home() {
 
   return (
     <I18nextProvider i18n={i18n}>
-      <div className="relative">
-        <LanguageSelector />
+  <div className="relative pt-0">
+        <Navbar />
         <HeroSection />
         <ExperienceSection />
         <TattooSection />
@@ -34,7 +34,9 @@ export default function Home() {
         <WhatsAppButton />
         
         <footer className="bg-black text-white/60 py-8 text-center border-t border-gold/20">
-          <p>© 2025 MISHKA Tattoo & Beauty Salon. All rights reserved.</p>
+          <p>© 2025 MISHKA Tattoo & Beauty Salon. </p>
+          <p>All rights reserved.</p>
+          <h4 className='pt-5'><b>Made by Nishant and Team</b> </h4>
         </footer>
       </div>
     </I18nextProvider>

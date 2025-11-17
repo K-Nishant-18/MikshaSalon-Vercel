@@ -90,8 +90,8 @@ const resources = {
         phoneLabel: "Phone Number",
         submit: "Book Appointment",
         contact: "Contact Us",
-        address: "123 Park Street, Kolkata",
-        phoneNumber: "+91 98765 43210",
+  address: "BLOCK B, Near Mollargate Kashturi Das Hospital, MAHESHTALA, Santoshpur Maheshtala-700142",
+  phoneNumber: "+91 7947141455",
         email: "info@mishka.salon"
       },
       whatsapp: "Chat on WhatsApp",
@@ -188,8 +188,8 @@ const resources = {
         phoneLabel: "ফোন নম্বর",
         submit: "অ্যাপয়েন্টমেন্ট বুক করুন",
         contact: "যোগাযোগ করুন",
-        address: "১২৩ পার্ক স্ট্রিট, কলকাতা",
-        phoneNumber: "+৯১ ৯৮৭৬৫ ৪৩২১০",
+  address: "ব্লক বি, মোলারগেট নিকট কাশতুরি দাস হাসপাতাল, মহেশতলা, সন্তোষপুর মহেশতলা-৭০০১৪২",
+  phoneNumber: "+৯১ ৭৯৪৭১৪১৪৫৫",
         email: "info@mishka.salon"
       },
       whatsapp: "হোয়াটসঅ্যাপে চ্যাট করুন",
