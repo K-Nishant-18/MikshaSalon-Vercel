@@ -56,7 +56,7 @@ export default function BookingSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-6xl font-serif mb-4 text-white" data-testid="text-booking-title">
+          <h2 className="text-4xl md:text-6xl font-serif mb-4 text-black" data-testid="text-booking-title">
             {t('booking.title')}
           </h2>
         </motion.div>
