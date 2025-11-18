@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { MessageCircle } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
 export default function WhatsAppButton() {
   // Updated WhatsApp phone number to match displayed contact (+91 7947141455)
@@ -42,7 +43,7 @@ export default function WhatsAppButton() {
       </div>
 
       {/* Button */}
-      <button
+        <button
         onClick={handleClick}
         className="
           w-16 h-16 rounded-full bg-green-600 text-white shadow-xl 
@@ -51,7 +52,7 @@ export default function WhatsAppButton() {
           animate-float
         "
       >
-        <MessageCircle className="w-8 h-8" />
+        <FontAwesomeIcon icon={faWhatsapp} className="w-8 h-8" />
 
         {/* Pulse animation */}
         <span className="absolute inset-0 rounded-full border-4 border-green-600 animate-pulse-slow opacity-40"></span>
