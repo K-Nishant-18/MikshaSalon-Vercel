@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { I18nextProvider } from 'react-i18next';
 import i18n from '@/lib/i18n';
+import { Lock } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import ExperienceSection from '@/components/ExperienceSection';
@@ -12,6 +13,7 @@ import HygieneSection from '@/components/HygieneSection';
 import TestimonialSection from '@/components/TestimonialSection';
 import BookingSection from '@/components/BookingSection';
 import WhatsAppButton from '@/components/WhatsAppButton';
+// Using a plain anchor for the staff login link so it renders correctly
 
 export default function Home() {
   useEffect(() => {
@@ -37,6 +39,10 @@ export default function Home() {
           <p>© 2025 MISHKA Tattoo & Beauty Salon. </p>
           <p>All rights reserved.</p>
           <h4 className='pt-5'><b>Made by Nishant and Team</b> </h4>
+          <a href="/admin" data-testid="link-admin" className="inline-flex items-center gap-1 text-xs mt-2 text-white/40 hover:text-white/60 transition-colors">
+            <Lock className="w-3 h-3" />
+            Staff Login
+          </a>
         </footer>
       </div>
     </I18nextProvider>
