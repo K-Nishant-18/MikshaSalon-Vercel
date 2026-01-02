@@ -124,24 +124,30 @@ export default function AdminPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200">
+        <div className="min-h-screen bg-black">
+            {/* Background pattern */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,215,0,0.05),transparent_50%)]" />
             {/* Navbar */}
-            <nav className="bg-white border-b shadow-sm sticky top-0 z-10">
+            <nav className="bg-black/40 backdrop-blur-sm border-b border-gold/10 sticky top-0 z-10 relative">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-16">
                         <div className="flex items-center space-x-3">
-                            <div className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                                MISHKA Admin
+                            <div className="flex items-center gap-3">
+                                <img src="/logo2.png" alt="MISHKA Logo" className="w-20 h-10 object-cover" />
+                                {/* <div className="flex flex-col leading-tight">
+                                    <span className="text-white text-lg font-serif">MISHKA</span>
+                                    <span className="text-gold/70 text-xs -mt-1">Admin Portal</span>
+                                </div> */}
                             </div>
                         </div>
                         <div className="flex items-center gap-2">
                             <Link href="/">
-                                <Button variant="outline" className="flex items-center gap-2">
+                                <Button variant="outline" className="flex items-center gap-2 border-gold/30 text-white hover:bg-gold/10">
                                     <Home className="w-4 h-4" />
                                     <span>Back to Website</span>
                                 </Button>
                             </Link>
-                            <Button variant="destructive" onClick={handleLogout} className="flex items-center gap-2">
+                            <Button onClick={handleLogout} className="flex items-center gap-2 bg-gold hover:bg-gold/90 text-black font-semibold">
                                 <LogOut className="w-4 h-4" />
                                 <span>Logout</span>
                             </Button>
@@ -150,78 +156,78 @@ export default function AdminPage() {
                 </div>
             </nav>
 
-            <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+            <div className="max-w-7xl mx-auto p-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Header */}
                 <div className="mb-8">
-                    <h1 className="text-4xl font-bold text-gray-900 mb-2">Dashboard</h1>
-                    <p className="text-gray-600">Manage your salon bookings effectively</p>
+                    <h1 className="text-4xl font-bold text-white mb-2">Dashboard</h1>
+                    <p className="text-white/60">Manage your salon bookings effectively</p>
                 </div>
 
                 {/* Stats Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                    <Card className="border-l-4 border-l-blue-500 hover:shadow-lg transition-shadow">
+                    <Card className="border-l-4 border-l-gold hover:shadow-xl transition-shadow bg-white/5 backdrop-blur-sm border-gold/20">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-gray-600">Total Bookings</CardTitle>
-                            <Calendar className="h-5 w-5 text-blue-500" />
+                            <CardTitle className="text-sm font-medium text-white/80">Total Bookings</CardTitle>
+                            <Calendar className="h-5 w-5 text-gold" />
                         </CardHeader>
                         <CardContent>
-                            <div className="text-3xl font-bold text-gray-900">{bookings.length}</div>
-                            <p className="text-xs text-gray-500 mt-1">All time bookings</p>
+                            <div className="text-3xl font-bold text-white">{bookings.length}</div>
+                            <p className="text-xs text-white/50 mt-1">All time bookings</p>
                         </CardContent>
                     </Card>
 
-                    <Card className="border-l-4 border-l-yellow-500 hover:shadow-lg transition-shadow">
+                    <Card className="border-l-4 border-l-yellow-400 hover:shadow-xl transition-shadow bg-white/5 backdrop-blur-sm border-gold/20">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-gray-600">Pending</CardTitle>
-                            <AlertCircle className="h-5 w-5 text-yellow-500" />
+                            <CardTitle className="text-sm font-medium text-white/80">Pending</CardTitle>
+                            <AlertCircle className="h-5 w-5 text-yellow-400" />
                         </CardHeader>
                         <CardContent>
-                            <div className="text-3xl font-bold text-yellow-600">{pendingCount}</div>
-                            <p className="text-xs text-gray-500 mt-1">Awaiting confirmation</p>
+                            <div className="text-3xl font-bold text-yellow-400">{pendingCount}</div>
+                            <p className="text-xs text-white/50 mt-1">Awaiting confirmation</p>
                         </CardContent>
                     </Card>
 
-                    <Card className="border-l-4 border-l-blue-500 hover:shadow-lg transition-shadow">
+                    <Card className="border-l-4 border-l-blue-400 hover:shadow-xl transition-shadow bg-white/5 backdrop-blur-sm border-gold/20">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-gray-600">Confirmed</CardTitle>
-                            <CheckCircle className="h-5 w-5 text-blue-500" />
+                            <CardTitle className="text-sm font-medium text-white/80">Confirmed</CardTitle>
+                            <CheckCircle className="h-5 w-5 text-blue-400" />
                         </CardHeader>
                         <CardContent>
-                            <div className="text-3xl font-bold text-blue-600">{confirmedCount}</div>
-                            <p className="text-xs text-gray-500 mt-1">Ready to serve</p>
+                            <div className="text-3xl font-bold text-blue-400">{confirmedCount}</div>
+                            <p className="text-xs text-white/50 mt-1">Ready to serve</p>
                         </CardContent>
                     </Card>
 
-                    <Card className="border-l-4 border-l-green-500 hover:shadow-lg transition-shadow">
+                    <Card className="border-l-4 border-l-green-400 hover:shadow-xl transition-shadow bg-white/5 backdrop-blur-sm border-gold/20">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-gray-600">Completed</CardTitle>
-                            <CheckCircle className="h-5 w-5 text-green-500" />
+                            <CardTitle className="text-sm font-medium text-white/80">Completed</CardTitle>
+                            <CheckCircle className="h-5 w-5 text-green-400" />
                         </CardHeader>
                         <CardContent>
-                            <div className="text-3xl font-bold text-green-600">{completedCount}</div>
-                            <p className="text-xs text-gray-500 mt-1">Successfully done</p>
+                            <div className="text-3xl font-bold text-green-400">{completedCount}</div>
+                            <p className="text-xs text-white/50 mt-1">Successfully done</p>
                         </CardContent>
                     </Card>
                 </div>
 
                 {/* Filters */}
-                <Card className="mb-6">
+                <Card className="mb-6 bg-white/5 backdrop-blur-sm border-gold/20">
                     <CardHeader>
-                        <CardTitle>Filter Bookings</CardTitle>
+                        <CardTitle className="text-white">Filter Bookings</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <div className="flex flex-wrap gap-2">
                             <Button
                                 variant={filter === 'all' ? 'default' : 'outline'}
                                 onClick={() => setFilter('all')}
-                                className="flex items-center gap-2"
+                                className={filter === 'all' ? 'flex items-center gap-2 bg-gold hover:bg-gold/90 text-black' : 'flex items-center gap-2 border-gold/30 text-white hover:bg-gold/10'}
                             >
                                 All ({bookings.length})
                             </Button>
                             <Button
                                 variant={filter === 'pending' ? 'default' : 'outline'}
                                 onClick={() => setFilter('pending')}
-                                className="flex items-center gap-2"
+                                className={filter === 'pending' ? 'flex items-center gap-2 bg-gold hover:bg-gold/90 text-black' : 'flex items-center gap-2 border-gold/30 text-white hover:bg-gold/10'}
                             >
                                 <AlertCircle className="w-4 h-4" />
                                 Pending ({pendingCount})
@@ -229,7 +235,7 @@ export default function AdminPage() {
                             <Button
                                 variant={filter === 'confirmed' ? 'default' : 'outline'}
                                 onClick={() => setFilter('confirmed')}
-                                className="flex items-center gap-2"
+                                className={filter === 'confirmed' ? 'flex items-center gap-2 bg-gold hover:bg-gold/90 text-black' : 'flex items-center gap-2 border-gold/30 text-white hover:bg-gold/10'}
                             >
                                 <CheckCircle className="w-4 h-4" />
                                 Confirmed ({confirmedCount})
@@ -237,7 +243,7 @@ export default function AdminPage() {
                             <Button
                                 variant={filter === 'completed' ? 'default' : 'outline'}
                                 onClick={() => setFilter('completed')}
-                                className="flex items-center gap-2"
+                                className={filter === 'completed' ? 'flex items-center gap-2 bg-gold hover:bg-gold/90 text-black' : 'flex items-center gap-2 border-gold/30 text-white hover:bg-gold/10'}
                             >
                                 <CheckCircle className="w-4 h-4" />
                                 Completed ({completedCount})
@@ -247,40 +253,40 @@ export default function AdminPage() {
                 </Card>
 
                 {/* Bookings List */}
-                <Card>
+                <Card className="bg-white/5 backdrop-blur-sm border-gold/20">
                     <CardHeader>
-                        <CardTitle className="text-2xl">Bookings</CardTitle>
+                        <CardTitle className="text-2xl text-white">Bookings</CardTitle>
                     </CardHeader>
                     <CardContent>
                         {loading ? (
                             <div className="text-center py-12">
-                                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto"></div>
-                                <p className="text-gray-500 mt-4">Loading bookings...</p>
+                                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold mx-auto"></div>
+                                <p className="text-white/60 mt-4">Loading bookings...</p>
                             </div>
                         ) : filteredBookings.length === 0 ? (
                             <div className="text-center py-12">
-                                <Calendar className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                                <p className="text-gray-500 text-lg">No bookings found</p>
-                                <p className="text-gray-400 text-sm">Bookings will appear here once customers make appointments</p>
+                                <Calendar className="w-16 h-16 text-gold/30 mx-auto mb-4" />
+                                <p className="text-white/70 text-lg">No bookings found</p>
+                                <p className="text-white/40 text-sm">Bookings will appear here once customers make appointments</p>
                             </div>
                         ) : (
                             <div className="space-y-4">
                                 {filteredBookings.map((booking) => (
                                     <div
                                         key={booking.id}
-                                        className="border-2 rounded-xl p-6 hover:shadow-lg transition-all bg-white"
+                                        className="border-2 border-gold/20 rounded-xl p-6 hover:shadow-xl hover:border-gold/40 transition-all bg-white/5 backdrop-blur-sm"
                                     >
                                         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
                                             <div className="flex-1 space-y-3">
                                                 <div className="flex items-center gap-3">
-                                                    <User className="h-5 w-5 text-purple-600" />
-                                                    <span className="font-bold text-lg text-gray-900">{booking.customerName}</span>
+                                                    <User className="h-5 w-5 text-gold" />
+                                                    <span className="font-bold text-lg text-white">{booking.customerName}</span>
                                                     <span
                                                         className={`px-3 py-1 rounded-full text-xs font-semibold ${booking.status === 'pending'
-                                                            ? 'bg-yellow-100 text-yellow-800'
+                                                            ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
                                                             : booking.status === 'confirmed'
-                                                                ? 'bg-blue-100 text-blue-800'
-                                                                : 'bg-green-100 text-green-800'
+                                                                ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                                                                : 'bg-green-500/20 text-green-400 border border-green-500/30'
                                                             }`}
                                                     >
                                                         {booking.status.toUpperCase()}
@@ -288,11 +294,11 @@ export default function AdminPage() {
                                                 </div>
 
                                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                                                    <div className="flex items-center gap-2 text-gray-600">
+                                                    <div className="flex items-center gap-2 text-white/60">
                                                         <Phone className="h-4 w-4" />
                                                         <span className="text-sm">{booking.customerPhone}</span>
                                                     </div>
-                                                    <div className="flex items-center gap-2 text-gray-600">
+                                                    <div className="flex items-center gap-2 text-white/60">
                                                         <Calendar className="h-4 w-4" />
                                                         <span className="text-sm">
                                                             {new Date(booking.bookingDate).toLocaleDateString('en-US', {
@@ -307,18 +313,18 @@ export default function AdminPage() {
                                                     </div>
                                                 </div>
 
-                                                <div className="bg-gray-50 rounded-lg p-3">
-                                                    <span className="font-semibold text-gray-700">Service:</span>{' '}
-                                                    <span className="text-gray-900">{booking.serviceName}</span>
-                                                    <span className="ml-2 text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded">
+                                                <div className="bg-gold/5 border border-gold/20 rounded-lg p-3">
+                                                    <span className="font-semibold text-white/80">Service:</span>{' '}
+                                                    <span className="text-white">{booking.serviceName}</span>
+                                                    <span className="ml-2 text-xs bg-gold/20 text-gold border border-gold/30 px-2 py-1 rounded">
                                                         {booking.serviceCategory}
                                                     </span>
                                                 </div>
 
                                                 {booking.notes && (
-                                                    <div className="bg-blue-50 rounded-lg p-3">
-                                                        <span className="font-semibold text-gray-700">Notes:</span>{' '}
-                                                        <span className="text-gray-600 italic">{booking.notes}</span>
+                                                    <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3">
+                                                        <span className="font-semibold text-white/80">Notes:</span>{' '}
+                                                        <span className="text-white/60 italic">{booking.notes}</span>
                                                     </div>
                                                 )}
                                             </div>
