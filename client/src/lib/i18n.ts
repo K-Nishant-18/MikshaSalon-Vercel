@@ -78,9 +78,13 @@ const resources = {
         review1: "Best tattoo experience of my life! The artist was professional and the studio was incredibly clean.",
         review2: "Makeup was flawless and long-lasting. Perfect for my wedding day!",
         review3: "Amazing hair styling service. I always leave feeling confident and beautiful.",
+        review4: "Exceptional service and talented artists. Highly recommend for anyone looking for quality work!",
+        review5: "The attention to detail is incredible. Every visit is a wonderful experience.",
         client1: "Priya Sharma",
         client2: "Raj Patel",
-        client3: "Ananya Das"
+        client3: "Ananya Das",
+        client4: "Sneha Gupta",
+        client5: "Vikram Singh"
       },
       booking: {
         title: "Book Your Appointment",
@@ -181,9 +185,13 @@ const resources = {
         review1: "আমার জীবনের সেরা ট্যাটু অভিজ্ঞতা! শিল্পী পেশাদার এবং স্টুডিও অবিশ্বাস্যভাবে পরিচ্ছন্ন ছিল।",
         review2: "মেকআপ ত্রুটিহীন এবং দীর্ঘস্থায়ী ছিল। আমার বিয়ের দিনের জন্য নিখুঁত!",
         review3: "আশ্চর্যজনক চুল স্টাইলিং সেবা। আমি সবসময় আত্মবিশ্বাসী এবং সুন্দর অনুভব করে চলে যাই।",
+        review4: "ব্যতিক্রমী সেবা এবং প্রতিভাবান শিল্পী। মানসম্পন্ন কাজের জন্য অত্যন্ত সুপারিশ করি!",
+        review5: "বিস্তারিত মনোযোগ অবিশ্বাস্য। প্রতিটি পরিদর্শন একটি চমৎকার অভিজ্ঞতা।",
         client1: "প্রিয়া শর্মা",
         client2: "রাজ প্যাটেল",
-        client3: "অনন্যা দাস"
+        client3: "অনন্যা দাস",
+        client4: "স্নেহা গুপ্তা",
+        client5: "বিক্রম সিং"
       },
       booking: {
         title: "আপনার অ্যাপয়েন্টমেন্ট বুক করুন",
