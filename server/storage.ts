@@ -7,10 +7,10 @@ import {
   type GalleryItem, type InsertGallery,
   type Testimonial, type InsertTestimonial,
   type ContentItem, type InsertContent
-} from "@shared/schema";
+} from "../shared/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
-import { users, bookings, artists, services, customers, gallery, testimonials, content } from "@shared/schema";
+import { users, bookings, artists, services, customers, gallery, testimonials, content } from "../shared/schema";
 
 export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
