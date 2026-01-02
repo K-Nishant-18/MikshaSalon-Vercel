@@ -15,6 +15,17 @@ export async function buildApp() {
   }));
   app.use(express.urlencoded({ extended: false }));
 
+  // Vercel runs behind a proxy
+  app.set("trust proxy", 1);
+
+  // Vercel rewrite might strip /api prefix
+  app.use((req, res, next) => {
+    if (!req.path.startsWith('/api') && req.path.startsWith('/admin')) {
+      req.url = '/api' + req.url;
+    }
+    next();
+  });
+
   // Serverless-friendly session storage using signed cookies.
   // Keep session small (avoid storing large objects) since data is stored in the client cookie.
   // Set SESSION_SECRET in environment for cookie signing. Default to a dev fallback.
