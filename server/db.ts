@@ -1,15 +1,22 @@
-import { neon } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
+import { createClient } from '@libsql/client';
+import { drizzle } from 'drizzle-orm/libsql';
 import * as schema from "../shared/schema";
 
 const databaseUrl = process.env.DATABASE_URL;
-if (!databaseUrl) {
-  console.error("DATABASE_URL must be set. Did you forget to provision a database?");
+const authToken = process.env.DATABASE_AUTH_TOKEN;
+
+if (!databaseUrl || !authToken) {
+  console.error("DATABASE_URL and DATABASE_AUTH_TOKEN must be set!");
 } else {
-  console.log("Initializing Neon DB...");
-  // Log masked URL for debugging Vercel logs
-  console.log("Database URL starts with: " + databaseUrl.substring(0, 15) + "...");
+  console.log("Initializing Turso DB...");
+  console.log("Database URL: " + databaseUrl.substring(0, 20) + "...");
 }
 
-export const sql = neon(databaseUrl || "postgres://user:pass@host/db");
-export const db = drizzle(sql, { schema });
+const client = createClient({
+  url: databaseUrl || "file:local.db",
+  authToken: authToken,
+});
+
+export const db = drizzle(client, { schema });
+
+console.log("Turso DB client initialized successfully");

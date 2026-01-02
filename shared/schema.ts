@@ -1,90 +1,90 @@
-import { pgTable, serial, text, varchar, timestamp, boolean, integer, decimal, json } from "drizzle-orm/pg-core";
+import { sqliteTable, integer, text, real } from "drizzle-orm/sqlite-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-export const users = pgTable("users", {
-  id: serial("id").primaryKey(),
-  username: varchar("username", { length: 255 }).notNull().unique(),
+export const users = sqliteTable("users", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  username: text("username").notNull().unique(),
   password: text("password").notNull(),
 });
 
-export const bookings = pgTable("bookings", {
-  id: serial("id").primaryKey(),
-  customerName: varchar("customer_name", { length: 255 }).notNull(),
-  customerPhone: varchar("customer_phone", { length: 50 }).notNull(),
-  customerEmail: varchar("customer_email", { length: 255 }),
-  serviceName: varchar("service_name", { length: 255 }).notNull(),
-  serviceCategory: varchar("service_category", { length: 100 }).notNull(),
-  artistName: varchar("artist_name", { length: 255 }),
-  bookingDate: timestamp("booking_date").notNull(),
-  status: varchar("status", { length: 50 }).default("pending").notNull(),
+export const bookings = sqliteTable("bookings", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  customerName: text("customer_name").notNull(),
+  customerPhone: text("customer_phone").notNull(),
+  customerEmail: text("customer_email"),
+  serviceName: text("service_name").notNull(),
+  serviceCategory: text("service_category").notNull(),
+  artistName: text("artist_name"),
+  bookingDate: integer("booking_date", { mode: "timestamp" }).notNull(),
+  status: text("status").default("pending").notNull(),
   notes: text("notes"),
-  price: decimal("price", { precision: 10, scale: 2 }),
-  createdAt: timestamp("created_at").defaultNow(),
+  price: real("price"),
+  createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(() => new Date()),
 });
 
-export const artists = pgTable("artists", {
-  id: serial("id").primaryKey(),
-  name: varchar("name", { length: 255 }).notNull(),
-  specialty: varchar("specialty", { length: 255 }).notNull(),
+export const artists = sqliteTable("artists", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  name: text("name").notNull(),
+  specialty: text("specialty").notNull(),
   bio: text("bio"),
-  phone: varchar("phone", { length: 50 }),
-  email: varchar("email", { length: 255 }),
-  isAvailable: boolean("is_available").default(true).notNull(),
-  rating: decimal("rating", { precision: 3, scale: 1 }).default("5.0"),
+  phone: text("phone"),
+  email: text("email"),
+  isAvailable: integer("is_available", { mode: "boolean" }).default(true).notNull(),
+  rating: real("rating").default(5.0),
   imageUrl: text("image_url"),
 });
 
-export const services = pgTable("services", {
-  id: serial("id").primaryKey(),
-  name: varchar("name", { length: 255 }).notNull(),
-  category: varchar("category", { length: 100 }).notNull(),
-  type: varchar("type", { length: 100 }).notNull(),
+export const services = sqliteTable("services", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  name: text("name").notNull(),
+  category: text("category").notNull(),
+  type: text("type").notNull(),
   description: text("description"),
-  price: decimal("price", { precision: 10, scale: 2 }).notNull(),
+  price: real("price").notNull(),
   duration: integer("duration"), // in minutes
-  isVisible: boolean("is_visible").default(true).notNull(),
+  isVisible: integer("is_visible", { mode: "boolean" }).default(true).notNull(),
 });
 
-export const customers = pgTable("customers", {
-  id: serial("id").primaryKey(),
-  name: varchar("name", { length: 255 }).notNull(),
-  phone: varchar("phone", { length: 50 }).notNull(),
-  email: varchar("email", { length: 255 }),
+export const customers = sqliteTable("customers", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  name: text("name").notNull(),
+  phone: text("phone").notNull(),
+  email: text("email"),
   totalBookings: integer("total_bookings").default(0),
-  loyaltyStatus: varchar("loyalty_status", { length: 50 }).default("regular"),
+  loyaltyStatus: text("loyalty_status").default("regular"),
   notes: text("notes"),
-  lastVisit: timestamp("last_visit"),
+  lastVisit: integer("last_visit", { mode: "timestamp" }),
 });
 
-export const gallery = pgTable("gallery", {
-  id: serial("id").primaryKey(),
+export const gallery = sqliteTable("gallery", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
   imageUrl: text("image_url").notNull(),
-  category: varchar("category", { length: 100 }).notNull(),
+  category: text("category").notNull(),
   caption: text("caption"),
-  tags: json("tags"),
-  isVisible: boolean("is_visible").default(true).notNull(),
-  createdAt: timestamp("created_at").defaultNow(),
+  tags: text("tags", { mode: "json" }),
+  isVisible: integer("is_visible", { mode: "boolean" }).default(true).notNull(),
+  createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(() => new Date()),
 });
 
-export const testimonials = pgTable("testimonials", {
-  id: serial("id").primaryKey(),
-  customerName: varchar("customer_name", { length: 255 }).notNull(),
+export const testimonials = sqliteTable("testimonials", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  customerName: text("customer_name").notNull(),
   text: text("text").notNull(),
   rating: integer("rating").notNull(),
-  service: varchar("service", { length: 255 }),
-  isApproved: boolean("is_approved").default(false).notNull(),
-  isVisible: boolean("is_visible").default(true).notNull(),
-  createdAt: timestamp("created_at").defaultNow(),
+  service: text("service"),
+  isApproved: integer("is_approved", { mode: "boolean" }).default(false).notNull(),
+  isVisible: integer("is_visible", { mode: "boolean" }).default(true).notNull(),
+  createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(() => new Date()),
 });
 
-export const content = pgTable("content", {
-  id: serial("id").primaryKey(),
-  key: varchar("key", { length: 255 }).notNull().unique(),
-  section: varchar("section", { length: 100 }).notNull(),
+export const content = sqliteTable("content", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  key: text("key").notNull().unique(),
+  section: text("section").notNull(),
   englishText: text("english_text").notNull(),
   banglaText: text("bangla_text"),
-  updatedAt: timestamp("updated_at").defaultNow(),
+  updatedAt: integer("updated_at", { mode: "timestamp" }).$defaultFn(() => new Date()),
 });
 
 export const insertUserSchema = createInsertSchema(users).pick({
@@ -94,7 +94,7 @@ export const insertUserSchema = createInsertSchema(users).pick({
 
 export const insertBookingSchema = createInsertSchema(bookings, {
   bookingDate: z.coerce.date(),
-  price: z.union([z.string(), z.number()]).transform(val => val?.toString()).optional().nullable(),
+  price: z.union([z.string(), z.number()]).transform(val => val ? Number(val) : null).optional().nullable(),
 }).omit({
   id: true,
   createdAt: true,
