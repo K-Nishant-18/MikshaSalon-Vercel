@@ -7,6 +7,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AdminSidebar } from "@/components/admin-sidebar";
 import { Home as HomeIcon } from "lucide-react";
 import HomePage from "@/pages/Home";
+import GalleryPage from "@/pages/Gallery";
 import NotFound from "@/pages/not-found";
 import Dashboard from "@/pages/admin/Dashboard";
 import Bookings from "@/pages/admin/Bookings";
@@ -55,7 +56,8 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
 function Router() {
   return (
     <Switch>
-  <Route path="/" component={HomePage} />
+      <Route path="/" component={HomePage} />
+      <Route path="/gallery" component={GalleryPage} />
       <Route path="/admin">
         {() => <AdminLayout><Dashboard /></AdminLayout>}
       </Route>

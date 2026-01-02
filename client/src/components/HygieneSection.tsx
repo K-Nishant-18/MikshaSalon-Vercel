@@ -35,7 +35,7 @@ export default function HygieneSection() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+        <div className="flex flex-wrap justify-center gap-8 md:gap-12">
           {hygieneItems.map((item, index) => (
             <motion.div
               key={item.text}

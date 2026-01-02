@@ -2,8 +2,8 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import tattooStudioImg from '@assets/generated_images/Luxury_tattoo_studio_interior_f0d54787.png';
-import beautySalonImg from '@assets/generated_images/Luxury_beauty_salon_interior_b10ce87e.png';
+import tattooStudioImg from '@assets/generated_images/salon_1.png';
+import beautySalonImg from '@assets/generated_images/salon_2.png';
 
 export default function ExperienceSection() {
   const { t } = useTranslation();

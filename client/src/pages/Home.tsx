@@ -9,6 +9,7 @@ import TattooSection from '@/components/TattooSection';
 import BeautySection from '@/components/BeautySection';
 import GallerySection from '@/components/GallerySection';
 import PricingSection from '@/components/PricingSection';
+import BrandsSection from '@/components/BrandsSection';
 import HygieneSection from '@/components/HygieneSection';
 import TestimonialSection from '@/components/TestimonialSection';
 import BookingSection from '@/components/BookingSection';
@@ -22,7 +23,7 @@ export default function Home() {
 
   return (
     <I18nextProvider i18n={i18n}>
-  <div className="relative pt-0">
+      <div className="relative pt-0">
         <Navbar />
         <HeroSection />
         <ExperienceSection />
@@ -30,11 +31,12 @@ export default function Home() {
         <BeautySection />
         <GallerySection />
         <PricingSection />
+        <BrandsSection />
         <HygieneSection />
         <TestimonialSection />
         <BookingSection />
         <WhatsAppButton />
-        
+
         <footer className="bg-black text-white/60 py-8 text-center border-t border-gold/20">
           <p>© 2025 MISHKA Tattoo & Beauty Salon. </p>
           <p>All rights reserved.</p>

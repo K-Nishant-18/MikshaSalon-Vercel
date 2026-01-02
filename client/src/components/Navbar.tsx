@@ -7,7 +7,7 @@ export default function Navbar() {
         {/* Logo on the left */}
         <div className="flex items-center gap-4">
           <a href="#" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gold flex items-center justify-center text-black font-bold">M</div>
+            <img src="/logo2.png" alt="MISHKA Logo" className="w-20 h-10 object-cover" />
             <div className="flex flex-col leading-tight">
               <span className="text-white text-lg font-serif">MISHKA</span>
               <span className="text-white/70 text-xs -mt-1">Tattoo & Beauty</span>
@@ -18,7 +18,7 @@ export default function Navbar() {
         {/* Placeholder for nav links (could be expanded) */}
         <nav className="hidden md:flex gap-8 text-white/90">
           <a href="#services" className="hover:text-white">Services</a>
-          <a href="#gallery" className="hover:text-white">Gallery</a>
+          <a href="/gallery" className="hover:text-white">Gallery</a>
           <a href="#booking" className="hover:text-white">Booking</a>
         </nav>
 

@@ -7,7 +7,7 @@ const resources = {
       hero: {
         title: "Art. Beauty. Identity.",
         subtitle: "Perfected At MISHKA",
-        description: "Tattoos that speak. Beauty that shines.",
+        description: "Under One Roof Beauty Salon Premium Haircut | Beauty | Grooming | Hair Extension & Tattoo Services in Kolkata",
         bookButton: "Book Appointment",
         galleryButton: "Explore Gallery"
       },
@@ -15,18 +15,23 @@ const resources = {
         title: "The MISHKA Experience",
         description: "At MISHKA Tattoo & Beauty Salon, we blend artistic mastery with beauty expertise. A space where creativity meets confidence."
       },
-      tattoo: {
-        title: "Tattoo Artistry",
-        subtitle: "Express Your Story",
-        fineLine: "Fine Line",
-        mandala: "Mandala",
-        realism: "Realism Portraits",
-        coverup: "Cover-ups",
-        brush: "Brush/Ink Art",
-        color: "Color Tattoos",
-        custom: "Custom Designs",
-        hygiene: "100% Hygiene Guarantee",
-        hygieneDesc: "Single-use needles • Premium inks • Certified artists"
+      aboutUs: {
+        title: "About Us",
+        subtitle: "Where Art Meets Beauty",
+        storyTitle: "Our Story",
+        storyPara1: "MISHKA Tattoo & Beauty Salon was born from a passion for artistic expression and beauty. Founded in Maheshtala, we create a space where creativity thrives and every client leaves empowered.",
+        storyPara2: "Our vision was simple: blend tattoo artistry with premium beauty services under one roof. Today, we're more than a salon—we're a community celebrating self-expression and redefining beauty on your terms.",
+        storyPara3: "With certified artists and beauty experts, we combine experience with cutting-edge techniques. From intricate tattoos to stunning makeovers, every service reflects our commitment to excellence.",
+        valuesTitle: "Our Values",
+        value1Title: "Passion & Artistry",
+        value1Desc: "Every stroke, every look is crafted with passion and precision by our talented team of artists.",
+        value2Title: "Excellence & Safety",
+        value2Desc: "We maintain the highest standards of hygiene and use only premium, certified products.",
+        value3Title: "Community & Trust",
+        value3Desc: "Building lasting relationships with our clients through transparency, care, and exceptional service.",
+        achievement1: "5+ Years of Excellence",
+        achievement2: "1000+ Happy Clients",
+        achievement3: "Certified Artists & Experts"
       },
       beauty: {
         title: "Beauty Services",
@@ -90,8 +95,8 @@ const resources = {
         phoneLabel: "Phone Number",
         submit: "Book Appointment",
         contact: "Contact Us",
-  address: "BLOCK B, Near Mollargate Kashturi Das Hospital, MAHESHTALA, Santoshpur Maheshtala-700142",
-  phoneNumber: "+91 7947141455",
+        address: "BLOCK B, Near Mollargate Kashturi Das Hospital, MAHESHTALA, Santoshpur Maheshtala-700142",
+        phoneNumber: "+91 7947141455",
         email: "info@mishka.salon"
       },
       whatsapp: "Chat on WhatsApp",
@@ -105,7 +110,7 @@ const resources = {
       hero: {
         title: "শিল্প। সৌন্দর্য। পরিচয়।",
         subtitle: "মিশকায় নিখুঁত",
-        description: "ট্যাটু যা কথা বলে। সৌন্দর্য যা উজ্জ্বল।",
+        description: "এক ছাদের নিচে সৌন্দর্য সেলুন প্রিমিয়াম হেয়ারকাট|সৌন্দর্য|গ্রুমিং|হেয়ার এক্সটেনশন ও ট্যাটু সেবা কলকাতায়",
         bookButton: "অ্যাপয়েন্টমেন্ট বুক করুন",
         galleryButton: "গ্যালারি দেখুন"
       },
@@ -113,18 +118,23 @@ const resources = {
         title: "মিশকা অভিজ্ঞতা",
         description: "মিশকা ট্যাটু ও বিউটি সেলুনে, আমরা শিল্পকলা এবং সৌন্দর্য দক্ষতার সমন্বয় করি। একটি স্থান যেখানে সৃজনশীলতা আত্মবিশ্বাসের সাথে মিলিত হয়।"
       },
-      tattoo: {
-        title: "ট্যাটু শিল্প",
-        subtitle: "আপনার গল্প প্রকাশ করুন",
-        fineLine: "ফাইন লাইন",
-        mandala: "মন্ডল",
-        realism: "বাস্তববাদী প্রতিকৃতি",
-        coverup: "কভার-আপ",
-        brush: "ব্রাশ/ইঙ্ক আর্ট",
-        color: "রঙিন ট্যাটু",
-        custom: "কাস্টম ডিজাইন",
-        hygiene: "১০০% স্বাস্থ্যবিধি নিশ্চয়তা",
-        hygieneDesc: "একবার ব্যবহারযোগ্য সূঁচ • প্রিমিয়াম কালি • সার্টিফাইড শিল্পী"
+      aboutUs: {
+        title: "আমাদের সম্পর্কে",
+        subtitle: "যেখানে শিল্প সৌন্দর্যের সাথে মিলিত",
+        storyTitle: "আমাদের গল্প",
+        storyPara1: "মিশকা ট্যাটু ও বিউটি সেলুন শিল্পকলা ও সৌন্দর্যের প্রতি আবেগ থেকে জন্মেছে। মহেশতলায় প্রতিষ্ঠিত, আমরা এমন স্থান তৈরি করি যেখানে সৃজনশীলতা বিকশিত হয় এবং প্রতিটি ক্লায়েন্ট ক্ষমতাপ্রাপ্ত হয়ে যায়।",
+        storyPara2: "আমাদের দৃষ্টিভঙ্গি সহজ ছিল: একই ছাদের নীচে ট্যাটু শিল্প ও প্রিমিয়াম সৌন্দর্য সেবার সমন্বয়। আজ, আমরা শুধু সেলুনের চেয়ে বেশি—একটি সম্প্রদায় যা আত্ম-প্রকাশ উদযাপন করে এবং আপনার শর্তে সৌন্দর্য পুনর্নির্ধারণ করে।",
+        storyPara3: "সার্টিফাইড শিল্পী ও বিশেষজ্ঞদের সাথে, আমরা অভিজ্ঞতা ও আধুনিক কৌশল একত্রিত করি। জটিল ট্যাটু থেকে চমৎকার মেকওভার পর্যন্ত, প্রতিটি সেবা আমাদের শ্রেষ্ঠত্বের প্রতিশ্রুতি প্রতিফলিত করে।",
+        valuesTitle: "আমাদের মূল্যবোধ",
+        value1Title: "আবেগ ও শিল্পকলা",
+        value1Desc: "প্রতিটি আঁচড়, প্রতিটি চেহারা আমাদের প্রতিভাবান শিল্পীদের দ্বারা আবেগ এবং নিখুঁততার সাথে তৈরি।",
+        value2Title: "শ্রেষ্ঠত্ব ও নিরাপত্তা",
+        value2Desc: "আমরা স্বাস্থ্যবিধির সর্বোচ্চ মান বজায় রাখি এবং শুধুমাত্র প্রিমিয়াম, সার্টিফাইড পণ্য ব্যবহার করি।",
+        value3Title: "সম্প্রদায় ও বিশ্বাস",
+        value3Desc: "স্বচ্ছতা, যত্ন এবং ব্যতিক্রমী সেবার মাধ্যমে আমাদের ক্লায়েন্টদের সাথে দীর্ঘস্থায়ী সম্পর্ক গড়ে তোলা।",
+        achievement1: "৫+ বছরের শ্রেষ্ঠত্ব",
+        achievement2: "১০০০+ সন্তুষ্ট গ্রাহক",
+        achievement3: "সার্টিফাইড শিল্পী ও বিশেষজ্ঞ"
       },
       beauty: {
         title: "সৌন্দর্য সেবা",
@@ -188,8 +198,8 @@ const resources = {
         phoneLabel: "ফোন নম্বর",
         submit: "অ্যাপয়েন্টমেন্ট বুক করুন",
         contact: "যোগাযোগ করুন",
-  address: "ব্লক বি, মোলারগেট নিকট কাশতুরি দাস হাসপাতাল, মহেশতলা, সন্তোষপুর মহেশতলা-৭০০১৪২",
-  phoneNumber: "+৯১ ৭৯৪৭১৪১৪৫৫",
+        address: "ব্লক বি, মোলারগেট নিকট কাশতুরি দাস হাসপাতাল, মহেশতলা, সন্তোষপুর মহেশতলা-৭০০১৪২",
+        phoneNumber: "+৯১ ৭৯৪৭১৪১৪৫৫",
         email: "info@mishka.salon"
       },
       whatsapp: "হোয়াটসঅ্যাপে চ্যাট করুন",

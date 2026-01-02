@@ -4,14 +4,8 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { ZoomIn } from 'lucide-react';
-import fineTattoo from '@assets/generated_images/Fine_line_floral_tattoo_8fac8d05.png';
-import realisticTattoo from '@assets/generated_images/Realistic_portrait_tattoo_e0ef5c7c.png';
-import mandalaTattoo from '@assets/generated_images/Geometric_mandala_tattoo_9743e2e7.png';
-import bridalMakeup from '@assets/generated_images/Bridal_makeup_look_ca619aa1.png';
-import nailArt from '@assets/generated_images/Gold_chrome_nail_art_9ff7c3a0.png';
-import hairStyling from '@assets/generated_images/Professional_hair_styling_cba7fdbf.png';
 
-type Category = 'all' | 'tattoos' | 'makeup' | 'nails' | 'hair';
+type Category = 'all' | 'hair' | 'mehndi' | 'makeup' | 'nails' | 'tattoos';
 
 export default function GallerySection() {
   const { t } = useTranslation();
@@ -22,19 +16,25 @@ export default function GallerySection() {
 
   const categories = [
     { key: 'all' as Category, label: t('gallery.all') },
-    { key: 'tattoos' as Category, label: t('gallery.tattoos') },
+    { key: 'hair' as Category, label: t('gallery.hair') },
+    { key: 'mehndi' as Category, label: 'Mehndi' },
     { key: 'makeup' as Category, label: t('gallery.makeup') },
     { key: 'nails' as Category, label: t('gallery.nails') },
-    { key: 'hair' as Category, label: t('gallery.hair') }
+    { key: 'tattoos' as Category, label: t('gallery.tattoos') }
   ];
 
   const images = [
-    { src: fineTattoo, category: 'tattoos', alt: 'Fine Line Tattoo' },
-    { src: realisticTattoo, category: 'tattoos', alt: 'Realistic Portrait Tattoo' },
-    { src: mandalaTattoo, category: 'tattoos', alt: 'Mandala Tattoo' },
-    { src: bridalMakeup, category: 'makeup', alt: 'Bridal Makeup' },
-    { src: nailArt, category: 'nails', alt: 'Nail Art' },
-    { src: hairStyling, category: 'hair', alt: 'Hair Styling' }
+    { src: '/gallery/hair1.png', category: 'hair', alt: 'Hair Styling' },
+    { src: '/gallery/hair2.jpg', category: 'hair', alt: 'Professional Hair Design' },
+    { src: '/gallery/mehndi1.png', category: 'mehndi', alt: 'Mehndi Design' },
+    { src: '/gallery/mehndi2.png', category: 'mehndi', alt: 'Henna Art' },
+    { src: '/gallery/bridal_1.jpg', category: 'makeup', alt: 'Bridal Makeup' },
+    { src: '/gallery/makup1.png', category: 'makeup', alt: 'Professional Makeup' },
+    { src: '/gallery/makup2.png', category: 'makeup', alt: 'HD Makeup' },
+    { src: '/gallery/tejaswinimakeupartist.com_34_Image.png', category: 'makeup', alt: 'Makeup Artistry' },
+    { src: '/gallery/nails_1.jpg', category: 'nails', alt: 'Nail Art' },
+    { src: '/gallery/tattoo1.png', category: 'tattoos', alt: 'Tattoo Design' },
+    { src: '/gallery/tattoo3.jpg', category: 'tattoos', alt: 'Tattoo Art' }
   ];
 
   const filteredImages = activeCategory === 'all'
@@ -75,7 +75,7 @@ export default function GallerySection() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredImages.map((img, index) => (
+          {filteredImages.slice(0, 9).map((img, index) => (
             <motion.div
               key={img.src}
               initial={{ opacity: 0, scale: 0.9 }}
@@ -96,6 +96,23 @@ export default function GallerySection() {
             </motion.div>
           ))}
         </div>
+
+        {/* View Full Gallery Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 1 }}
+          className="flex justify-center mt-12"
+        >
+          <a href="/gallery">
+            <Button
+              size="lg"
+              className="bg-gold/10 border-2 border-gold text-gold hover:bg-gold hover:text-black transition-all duration-300 px-8 py-6 text-lg"
+            >
+              View Full Gallery
+            </Button>
+          </a>
+        </motion.div>
       </div>
 
       {lightboxImage && (
