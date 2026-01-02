@@ -1,8 +1,39 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { createClient } from '@libsql/client';
 import { drizzle } from 'drizzle-orm/libsql';
-import { bookings, insertBookingSchema, updateBookingSchema } from '../../shared/schema';
+import { sqliteTable, integer, text } from "drizzle-orm/sqlite-core";
 import { eq } from 'drizzle-orm';
+import { z } from "zod";
+
+// Inline schema definition to avoid module resolution issues
+const bookings = sqliteTable("bookings", {
+    id: integer("id").primaryKey({ autoIncrement: true }),
+    customerName: text("customer_name").notNull(),
+    customerPhone: text("customer_phone").notNull(),
+    customerEmail: text("customer_email"),
+    serviceName: text("service_name").notNull(),
+    serviceCategory: text("service_category").notNull(),
+    bookingDate: integer("booking_date", { mode: "timestamp" }).notNull(),
+    status: text("status").default("pending").notNull(),
+    notes: text("notes"),
+    createdAt: integer("created_at", { mode: "timestamp" }).$defaultFn(() => new Date()),
+});
+
+const insertBookingSchema = z.object({
+    customerName: z.string().min(1),
+    customerPhone: z.string().min(1),
+    customerEmail: z.string().email().optional().nullable(),
+    serviceName: z.string().min(1),
+    serviceCategory: z.string().min(1),
+    bookingDate: z.coerce.date(),
+    status: z.enum(["pending", "confirmed", "completed"]).default("pending"),
+    notes: z.string().optional().nullable(),
+});
+
+const updateBookingSchema = z.object({
+    status: z.enum(["pending", "confirmed", "completed"]).optional(),
+    notes: z.string().optional(),
+});
 
 // Initialize database connection
 const getDb = () => {
