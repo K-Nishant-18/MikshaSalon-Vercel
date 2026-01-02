@@ -8,6 +8,9 @@ import {
   type Testimonial, type InsertTestimonial,
   type ContentItem, type InsertContent
 } from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
+import { users, bookings, artists, services, customers, gallery, testimonials, content } from "@shared/schema";
 
 export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
@@ -59,285 +62,186 @@ export interface IStorage {
   updateContent(id: number, content: Partial<ContentItem>): Promise<ContentItem>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<number, User>;
-  private bookings: Map<number, Booking>;
-  private artists: Map<number, Artist>;
-  private services: Map<number, Service>;
-  private customers: Map<number, Customer>;
-  private gallery: Map<number, GalleryItem>;
-  private testimonials: Map<number, Testimonial>;
-  private content: Map<number, ContentItem>;
-
-  private currentId: { [key: string]: number };
-
-  constructor() {
-    this.users = new Map();
-    this.bookings = new Map();
-    this.artists = new Map();
-    this.services = new Map();
-    this.customers = new Map();
-    this.gallery = new Map();
-    this.testimonials = new Map();
-    this.content = new Map();
-
-    this.currentId = {
-      users: 1,
-      bookings: 1,
-      artists: 1,
-      services: 1,
-      customers: 1,
-      gallery: 1,
-      testimonials: 1,
-      content: 1,
-    };
-  }
-
-  // User methods
+export class DatabaseStorage implements IStorage {
   async getUser(id: number): Promise<User | undefined> {
-    return this.users.get(id);
-  }
-
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
-  }
-
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const id = this.currentId.users++;
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
     return user;
   }
 
-  // Booking methods
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user;
+  }
+
+  async createUser(insertUser: InsertUser): Promise<User> {
+    const [user] = await db.insert(users).values(insertUser).$returningId();
+    // Fetch the created user to return the full object
+    const [newUser] = await db.select().from(users).where(eq(users.id, user.id));
+    return newUser;
+  }
+
+  // Bookings
   async getBookings(): Promise<Booking[]> {
-    return Array.from(this.bookings.values());
+    return await db.select().from(bookings);
   }
 
   async getBooking(id: number): Promise<Booking | undefined> {
-    return this.bookings.get(id);
+    const [booking] = await db.select().from(bookings).where(eq(bookings.id, id));
+    return booking;
   }
 
   async createBooking(insertBooking: InsertBooking): Promise<Booking> {
-    const id = this.currentId.bookings++;
-    const booking: Booking = {
-      ...insertBooking,
-      id,
-      createdAt: new Date(),
-      customerEmail: insertBooking.customerEmail || null,
-      artistName: insertBooking.artistName || null,
-      notes: insertBooking.notes || null,
-      price: insertBooking.price || null,
-      status: insertBooking.status || "pending",
-      serviceCategory: insertBooking.serviceCategory
-    };
-    this.bookings.set(id, booking);
+    const [result] = await db.insert(bookings).values(insertBooking).$returningId();
+    const [booking] = await db.select().from(bookings).where(eq(bookings.id, result.id));
     return booking;
   }
 
   async updateBooking(id: number, update: Partial<Booking>): Promise<Booking> {
-    const booking = await this.getBooking(id);
+    await db.update(bookings).set(update).where(eq(bookings.id, id));
+    const [booking] = await db.select().from(bookings).where(eq(bookings.id, id));
     if (!booking) throw new Error("Booking not found");
-    const updatedBooking = { ...booking, ...update };
-    this.bookings.set(id, updatedBooking);
-    return updatedBooking;
+    return booking;
   }
 
-  // Artist methods
+  // Artists
   async getArtists(): Promise<Artist[]> {
-    return Array.from(this.artists.values());
+    return await db.select().from(artists);
   }
 
   async getArtist(id: number): Promise<Artist | undefined> {
-    return this.artists.get(id);
+    const [artist] = await db.select().from(artists).where(eq(artists.id, id));
+    return artist;
   }
 
   async createArtist(insertArtist: InsertArtist): Promise<Artist> {
-    const id = this.currentId.artists++;
-    const artist: Artist = {
-      ...insertArtist,
-      id,
-      rating: "5.0",
-      bio: insertArtist.bio || null,
-      phone: insertArtist.phone || null,
-      email: insertArtist.email || null,
-      imageUrl: insertArtist.imageUrl || null,
-      isAvailable: insertArtist.isAvailable ?? true
-    };
-    this.artists.set(id, artist);
+    const [result] = await db.insert(artists).values(insertArtist).$returningId();
+    const [artist] = await db.select().from(artists).where(eq(artists.id, result.id));
     return artist;
   }
 
   async updateArtist(id: number, update: Partial<Artist>): Promise<Artist> {
-    const artist = await this.getArtist(id);
-    if (!artist) throw new Error("Artist not found");
-    const updatedArtist = { ...artist, ...update };
-    this.artists.set(id, updatedArtist);
-    return updatedArtist;
+    await db.update(artists).set(update).where(eq(artists.id, id));
+    const [artist] = await db.select().from(artists).where(eq(artists.id, id));
+    return artist!;
   }
 
-  // Service methods
+  // Services
   async getServices(): Promise<Service[]> {
-    return Array.from(this.services.values());
+    return await db.select().from(services);
   }
 
   async getService(id: number): Promise<Service | undefined> {
-    return this.services.get(id);
+    const [service] = await db.select().from(services).where(eq(services.id, id));
+    return service;
   }
 
   async createService(insertService: InsertService): Promise<Service> {
-    const id = this.currentId.services++;
-    const service: Service = {
-      ...insertService,
-      id,
-      description: insertService.description || null,
-      duration: insertService.duration || null,
-      isVisible: insertService.isVisible ?? true
-    };
-    this.services.set(id, service);
+    const [result] = await db.insert(services).values(insertService).$returningId();
+    const [service] = await db.select().from(services).where(eq(services.id, result.id));
     return service;
   }
 
   async updateService(id: number, update: Partial<Service>): Promise<Service> {
-    const service = await this.getService(id);
-    if (!service) throw new Error("Service not found");
-    const updatedService = { ...service, ...update };
-    this.services.set(id, updatedService);
-    return updatedService;
+    await db.update(services).set(update).where(eq(services.id, id));
+    const [service] = await db.select().from(services).where(eq(services.id, id));
+    return service!;
   }
 
-  // Customer methods
+  // Customers
   async getCustomers(): Promise<Customer[]> {
-    return Array.from(this.customers.values());
+    return await db.select().from(customers);
   }
 
   async getCustomer(id: number): Promise<Customer | undefined> {
-    return this.customers.get(id);
+    const [customer] = await db.select().from(customers).where(eq(customers.id, id));
+    return customer;
   }
 
   async createCustomer(insertCustomer: InsertCustomer): Promise<Customer> {
-    const id = this.currentId.customers++;
-    const customer: Customer = {
-      ...insertCustomer,
-      id,
-      totalBookings: 0,
-      lastVisit: null,
-      email: insertCustomer.email || null,
-      notes: insertCustomer.notes || null,
-      loyaltyStatus: insertCustomer.loyaltyStatus || "regular"
-    };
-    this.customers.set(id, customer);
+    const [result] = await db.insert(customers).values(insertCustomer).$returningId();
+    const [customer] = await db.select().from(customers).where(eq(customers.id, result.id));
     return customer;
   }
 
   async updateCustomer(id: number, update: Partial<Customer>): Promise<Customer> {
-    const customer = await this.getCustomer(id);
-    if (!customer) throw new Error("Customer not found");
-    const updatedCustomer = { ...customer, ...update };
-    this.customers.set(id, updatedCustomer);
-    return updatedCustomer;
+    await db.update(customers).set(update).where(eq(customers.id, id));
+    const [customer] = await db.select().from(customers).where(eq(customers.id, id));
+    return customer!;
   }
 
-  // Gallery methods
+  // Gallery
   async getGalleryItems(): Promise<GalleryItem[]> {
-    return Array.from(this.gallery.values());
+    return await db.select().from(gallery);
   }
 
   async getGalleryItem(id: number): Promise<GalleryItem | undefined> {
-    return this.gallery.get(id);
+    const [item] = await db.select().from(gallery).where(eq(gallery.id, id));
+    return item;
   }
 
   async createGalleryItem(insertGallery: InsertGallery): Promise<GalleryItem> {
-    const id = this.currentId.gallery++;
-    const galleryItem: GalleryItem = {
-      ...insertGallery,
-      id,
-      createdAt: new Date(),
-      caption: insertGallery.caption || null,
-      tags: insertGallery.tags || null,
-      isVisible: insertGallery.isVisible ?? true
-    };
-    this.gallery.set(id, galleryItem);
-    return galleryItem;
+    const [result] = await db.insert(gallery).values(insertGallery).$returningId();
+    const [item] = await db.select().from(gallery).where(eq(gallery.id, result.id));
+    return item;
   }
 
   async deleteGalleryItem(id: number): Promise<void> {
-    this.gallery.delete(id);
+    await db.delete(gallery).where(eq(gallery.id, id));
   }
 
   async updateGalleryItem(id: number, update: Partial<GalleryItem>): Promise<GalleryItem> {
-    const item = await this.getGalleryItem(id);
-    if (!item) throw new Error("Gallery item not found");
-    const updatedItem = { ...item, ...update };
-    this.gallery.set(id, updatedItem);
-    return updatedItem;
+    await db.update(gallery).set(update).where(eq(gallery.id, id));
+    const [item] = await db.select().from(gallery).where(eq(gallery.id, id));
+    return item!;
   }
 
-  // Testimonial methods
+  // Testimonials
   async getTestimonials(): Promise<Testimonial[]> {
-    return Array.from(this.testimonials.values());
+    return await db.select().from(testimonials);
   }
 
   async getTestimonial(id: number): Promise<Testimonial | undefined> {
-    return this.testimonials.get(id);
+    const [testimonial] = await db.select().from(testimonials).where(eq(testimonials.id, id));
+    return testimonial;
   }
 
   async createTestimonial(insertTestimonial: InsertTestimonial): Promise<Testimonial> {
-    const id = this.currentId.testimonials++;
-    const testimonial: Testimonial = {
-      ...insertTestimonial,
-      id,
-      createdAt: new Date(),
-      service: insertTestimonial.service || null,
-      isVisible: insertTestimonial.isVisible ?? true,
-      isApproved: insertTestimonial.isApproved ?? false
-    };
-    this.testimonials.set(id, testimonial);
+    const [result] = await db.insert(testimonials).values(insertTestimonial).$returningId();
+    const [testimonial] = await db.select().from(testimonials).where(eq(testimonials.id, result.id));
     return testimonial;
   }
 
   async deleteTestimonial(id: number): Promise<void> {
-    this.testimonials.delete(id);
+    await db.delete(testimonials).where(eq(testimonials.id, id));
   }
 
   async updateTestimonial(id: number, update: Partial<Testimonial>): Promise<Testimonial> {
-    const testimonial = await this.getTestimonial(id);
-    if (!testimonial) throw new Error("Testimonial not found");
-    const updatedTestimonial = { ...testimonial, ...update };
-    this.testimonials.set(id, updatedTestimonial);
-    return updatedTestimonial;
+    await db.update(testimonials).set(update).where(eq(testimonials.id, id));
+    const [testimonial] = await db.select().from(testimonials).where(eq(testimonials.id, id));
+    return testimonial!;
   }
 
-  // Content methods
+  // Content
   async getContent(): Promise<ContentItem[]> {
-    return Array.from(this.content.values());
+    return await db.select().from(content);
   }
 
   async getContentByKey(key: string): Promise<ContentItem | undefined> {
-    return Array.from(this.content.values()).find(item => item.key === key);
+    const [item] = await db.select().from(content).where(eq(content.key, key));
+    return item;
   }
 
   async createContent(insertContent: InsertContent): Promise<ContentItem> {
-    const id = this.currentId.content++;
-    const contentItem: ContentItem = {
-      ...insertContent,
-      id,
-      updatedAt: new Date(),
-      banglaText: insertContent.banglaText || null
-    };
-    this.content.set(id, contentItem);
-    return contentItem;
+    const [result] = await db.insert(content).values(insertContent).$returningId();
+    const [item] = await db.select().from(content).where(eq(content.id, result.id));
+    return item;
   }
 
   async updateContent(id: number, update: Partial<ContentItem>): Promise<ContentItem> {
-    const content = this.content.get(id);
-    if (!content) throw new Error("Content not found");
-    const updatedContent = { ...content, ...update, updatedAt: new Date() };
-    this.content.set(id, updatedContent);
-    return updatedContent;
+    await db.update(content).set(update).where(eq(content.id, id));
+    const [item] = await db.select().from(content).where(eq(content.id, id));
+    return item!;
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();

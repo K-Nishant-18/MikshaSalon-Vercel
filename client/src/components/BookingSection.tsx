@@ -2,12 +2,14 @@ import { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
+import { apiRequest } from "@/lib/queryClient";
 import { useDropzone } from 'react-dropzone';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 import { MapPin, Phone, Mail, Upload } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
@@ -15,6 +17,8 @@ export default function BookingSection() {
   const { t } = useTranslation();
   const { toast } = useToast();
   const [serviceType, setServiceType] = useState('');
+  const [subService, setSubService] = useState('');
+  const [message, setMessage] = useState('');
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
@@ -33,13 +37,44 @@ export default function BookingSection() {
     }
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Booking Submitted!",
-      description: "We'll contact you soon to confirm your appointment."
-    });
-    console.log('Booking submitted');
+    try {
+      const dateValue = (document.getElementById('date') as HTMLInputElement)?.value;
+
+      const bookingData = {
+        customerName: (document.getElementById('name') as HTMLInputElement)?.value,
+        customerPhone: (document.getElementById('phone') as HTMLInputElement)?.value,
+        serviceName: serviceType === 'beauty' ?
+          (subService ? `${t('beauty.' + subService)}` : 'Beauty Service') :
+          'Tattoo Session',
+        serviceCategory: serviceType,
+        bookingDate: dateValue ? new Date(dateValue).toISOString() : new Date().toISOString(),
+        notes: message,
+        status: 'pending'
+      };
+
+      await apiRequest('POST', '/api/admin/bookings', bookingData);
+
+      toast({
+        title: "Booking Submitted!",
+        description: "We'll contact you soon to confirm your appointment."
+      });
+
+      // Reset form
+      setServiceType('');
+      setSubService('');
+      setMessage('');
+      setUploadedFile(null);
+      (e.target as HTMLFormElement).reset();
+    } catch (error) {
+      console.error('Booking failed:', error);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to submit booking. Please try again."
+      });
+    }
   };
 
   return (
@@ -83,6 +118,29 @@ export default function BookingSection() {
                     </Select>
                   </div>
 
+                  {serviceType === 'beauty' && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                    >
+                      <Label htmlFor="sub-service">{t('booking.selectService')}</Label>
+                      <Select value={subService} onValueChange={setSubService}>
+                        <SelectTrigger id="sub-service" data-testid="select-sub-service">
+                          <SelectValue placeholder={t('booking.selectService')} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="hair">{t('beauty.hair')}</SelectItem>
+                          <SelectItem value="color">{t('beauty.color')}</SelectItem>
+                          <SelectItem value="makeup">{t('beauty.makeup')}</SelectItem>
+                          <SelectItem value="nails">{t('beauty.nails')}</SelectItem>
+                          <SelectItem value="skin">{t('beauty.skin')}</SelectItem>
+                          <SelectItem value="lashes">{t('beauty.lashes')}</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </motion.div>
+                  )}
+
                   <div>
                     <Label htmlFor="name">{t('booking.name')}</Label>
                     <Input
@@ -118,9 +176,8 @@ export default function BookingSection() {
                       <Label>{t('booking.uploadRef')}</Label>
                       <div
                         {...getRootProps()}
-                        className={`border-2 border-dashed border-gold/50 rounded-lg p-8 text-center cursor-pointer hover:border-gold transition-colors ${
-                          isDragActive ? 'bg-gold/10' : ''
-                        }`}
+                        className={`border-2 border-dashed border-gold/50 rounded-lg p-8 text-center cursor-pointer hover:border-gold transition-colors ${isDragActive ? 'bg-gold/10' : ''
+                          }`}
                         data-testid="dropzone-upload"
                       >
                         <input {...getInputProps()} />
@@ -131,6 +188,17 @@ export default function BookingSection() {
                       </div>
                     </div>
                   )}
+
+                  <div>
+                    <Label htmlFor="message">Special Requests / Message</Label>
+                    <Textarea
+                      id="message"
+                      placeholder="Any specific requests or questions?"
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      className="resize-none"
+                    />
+                  </div>
 
                   <Button
                     type="submit"
