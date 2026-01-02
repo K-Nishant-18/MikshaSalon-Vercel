@@ -1,9 +1,8 @@
 import type { Express } from "express";
-import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertBookingSchema, insertArtistSchema, insertServiceSchema, insertCustomerSchema, insertGallerySchema, insertTestimonialSchema, insertContentSchema } from "../shared/schema";
 
-export async function registerRoutes(app: Express): Promise<Server> {
+export async function registerRoutes(app: Express): Promise<void> {
   // Bookings
   // Health check with DB verification
   app.get("/api/health", async (_req, res) => {
@@ -184,8 +183,4 @@ export async function registerRoutes(app: Express): Promise<Server> {
     const content = await storage.updateContent(id, req.body);
     res.json(content);
   });
-
-  const httpServer = createServer(app);
-
-  return httpServer;
 }
