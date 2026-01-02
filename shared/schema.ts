@@ -1,14 +1,14 @@
-import { mysqlTable, serial, text, varchar, timestamp, boolean, int, decimal, json } from "drizzle-orm/mysql-core";
+import { pgTable, serial, text, varchar, timestamp, boolean, integer, decimal, json } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-export const users = mysqlTable("users", {
+export const users = pgTable("users", {
   id: serial("id").primaryKey(),
   username: varchar("username", { length: 255 }).notNull().unique(),
   password: text("password").notNull(),
 });
 
-export const bookings = mysqlTable("bookings", {
+export const bookings = pgTable("bookings", {
   id: serial("id").primaryKey(),
   customerName: varchar("customer_name", { length: 255 }).notNull(),
   customerPhone: varchar("customer_phone", { length: 50 }).notNull(),
@@ -23,7 +23,7 @@ export const bookings = mysqlTable("bookings", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const artists = mysqlTable("artists", {
+export const artists = pgTable("artists", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 255 }).notNull(),
   specialty: varchar("specialty", { length: 255 }).notNull(),
@@ -35,29 +35,29 @@ export const artists = mysqlTable("artists", {
   imageUrl: text("image_url"),
 });
 
-export const services = mysqlTable("services", {
+export const services = pgTable("services", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 255 }).notNull(),
   category: varchar("category", { length: 100 }).notNull(),
   type: varchar("type", { length: 100 }).notNull(),
   description: text("description"),
   price: decimal("price", { precision: 10, scale: 2 }).notNull(),
-  duration: int("duration"), // in minutes
+  duration: integer("duration"), // in minutes
   isVisible: boolean("is_visible").default(true).notNull(),
 });
 
-export const customers = mysqlTable("customers", {
+export const customers = pgTable("customers", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 255 }).notNull(),
   phone: varchar("phone", { length: 50 }).notNull(),
   email: varchar("email", { length: 255 }),
-  totalBookings: int("total_bookings").default(0),
+  totalBookings: integer("total_bookings").default(0),
   loyaltyStatus: varchar("loyalty_status", { length: 50 }).default("regular"),
   notes: text("notes"),
   lastVisit: timestamp("last_visit"),
 });
 
-export const gallery = mysqlTable("gallery", {
+export const gallery = pgTable("gallery", {
   id: serial("id").primaryKey(),
   imageUrl: text("image_url").notNull(),
   category: varchar("category", { length: 100 }).notNull(),
@@ -67,18 +67,18 @@ export const gallery = mysqlTable("gallery", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const testimonials = mysqlTable("testimonials", {
+export const testimonials = pgTable("testimonials", {
   id: serial("id").primaryKey(),
   customerName: varchar("customer_name", { length: 255 }).notNull(),
   text: text("text").notNull(),
-  rating: int("rating").notNull(),
+  rating: integer("rating").notNull(),
   service: varchar("service", { length: 255 }),
   isApproved: boolean("is_approved").default(false).notNull(),
   isVisible: boolean("is_visible").default(true).notNull(),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const content = mysqlTable("content", {
+export const content = pgTable("content", {
   id: serial("id").primaryKey(),
   key: varchar("key", { length: 255 }).notNull().unique(),
   section: varchar("section", { length: 100 }).notNull(),
