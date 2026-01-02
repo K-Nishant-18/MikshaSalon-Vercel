@@ -3,7 +3,12 @@
   "builds": [
     {
       "src": "api/bookings.ts",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "shared/**"
+        ]
+      }
     },
     {
       "src": "package.json",
