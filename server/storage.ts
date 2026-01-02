@@ -74,10 +74,8 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const [user] = await db.insert(users).values(insertUser).$returningId();
-    // Fetch the created user to return the full object
-    const [newUser] = await db.select().from(users).where(eq(users.id, user.id));
-    return newUser;
+    const [user] = await db.insert(users).values(insertUser).returning();
+    return user;
   }
 
   // Bookings
@@ -91,8 +89,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createBooking(insertBooking: InsertBooking): Promise<Booking> {
-    const [result] = await db.insert(bookings).values(insertBooking).$returningId();
-    const [booking] = await db.select().from(bookings).where(eq(bookings.id, result.id));
+    const [booking] = await db.insert(bookings).values(insertBooking).returning();
     return booking;
   }
 
@@ -114,8 +111,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createArtist(insertArtist: InsertArtist): Promise<Artist> {
-    const [result] = await db.insert(artists).values(insertArtist).$returningId();
-    const [artist] = await db.select().from(artists).where(eq(artists.id, result.id));
+    const [artist] = await db.insert(artists).values(insertArtist).returning();
     return artist;
   }
 
@@ -136,8 +132,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createService(insertService: InsertService): Promise<Service> {
-    const [result] = await db.insert(services).values(insertService).$returningId();
-    const [service] = await db.select().from(services).where(eq(services.id, result.id));
+    const [service] = await db.insert(services).values(insertService).returning();
     return service;
   }
 
@@ -158,8 +153,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createCustomer(insertCustomer: InsertCustomer): Promise<Customer> {
-    const [result] = await db.insert(customers).values(insertCustomer).$returningId();
-    const [customer] = await db.select().from(customers).where(eq(customers.id, result.id));
+    const [customer] = await db.insert(customers).values(insertCustomer).returning();
     return customer;
   }
 
@@ -180,8 +174,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createGalleryItem(insertGallery: InsertGallery): Promise<GalleryItem> {
-    const [result] = await db.insert(gallery).values(insertGallery).$returningId();
-    const [item] = await db.select().from(gallery).where(eq(gallery.id, result.id));
+    const [item] = await db.insert(gallery).values(insertGallery).returning();
     return item;
   }
 
@@ -206,8 +199,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createTestimonial(insertTestimonial: InsertTestimonial): Promise<Testimonial> {
-    const [result] = await db.insert(testimonials).values(insertTestimonial).$returningId();
-    const [testimonial] = await db.select().from(testimonials).where(eq(testimonials.id, result.id));
+    const [testimonial] = await db.insert(testimonials).values(insertTestimonial).returning();
     return testimonial;
   }
 
@@ -232,8 +224,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createContent(insertContent: InsertContent): Promise<ContentItem> {
-    const [result] = await db.insert(content).values(insertContent).$returningId();
-    const [item] = await db.select().from(content).where(eq(content.id, result.id));
+    const [item] = await db.insert(content).values(insertContent).returning();
     return item;
   }
 
