@@ -1,4 +1,3 @@
-```
 import { neon } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
 import * as schema from "../shared/schema";
@@ -14,4 +13,3 @@ if (!databaseUrl) {
 
 export const sql = neon(databaseUrl || "postgres://user:pass@host/db");
 export const db = drizzle(sql, { schema });
-```
