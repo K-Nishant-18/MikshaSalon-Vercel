@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Calendar, Phone, User, Clock, Home, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
-import { Link } from 'wouter';
+import { Calendar, Phone, User, Clock, Home, CheckCircle, XCircle, AlertCircle, LogOut } from 'lucide-react';
+import { Link, useLocation } from 'wouter';
 import { useToast } from '@/hooks/use-toast';
 
 interface Booking {
@@ -19,10 +19,19 @@ interface Booking {
 }
 
 export default function AdminPage() {
+    const [, setLocation] = useLocation();
     const [bookings, setBookings] = useState<Booking[]>([]);
     const [loading, setLoading] = useState(true);
     const [filter, setFilter] = useState<'all' | 'pending' | 'confirmed' | 'completed'>('all');
     const { toast } = useToast();
+
+    // Check authentication
+    useEffect(() => {
+        const isLoggedIn = sessionStorage.getItem('isAdminLoggedIn');
+        if (!isLoggedIn) {
+            setLocation('/login');
+        }
+    }, [setLocation]);
 
     // Fetch bookings from API
     useEffect(() => {
@@ -109,6 +118,11 @@ export default function AdminPage() {
         }
     };
 
+    const handleLogout = () => {
+        sessionStorage.removeItem('isAdminLoggedIn');
+        setLocation('/login');
+    };
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200">
             {/* Navbar */}
@@ -120,12 +134,18 @@ export default function AdminPage() {
                                 MISHKA Admin
                             </div>
                         </div>
-                        <Link href="/">
-                            <Button variant="outline" className="flex items-center gap-2">
-                                <Home className="w-4 h-4" />
-                                <span>Back to Website</span>
+                        <div className="flex items-center gap-2">
+                            <Link href="/">
+                                <Button variant="outline" className="flex items-center gap-2">
+                                    <Home className="w-4 h-4" />
+                                    <span>Back to Website</span>
+                                </Button>
+                            </Link>
+                            <Button variant="destructive" onClick={handleLogout} className="flex items-center gap-2">
+                                <LogOut className="w-4 h-4" />
+                                <span>Logout</span>
                             </Button>
-                        </Link>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -257,10 +277,10 @@ export default function AdminPage() {
                                                     <span className="font-bold text-lg text-gray-900">{booking.customerName}</span>
                                                     <span
                                                         className={`px-3 py-1 rounded-full text-xs font-semibold ${booking.status === 'pending'
-                                                                ? 'bg-yellow-100 text-yellow-800'
-                                                                : booking.status === 'confirmed'
-                                                                    ? 'bg-blue-100 text-blue-800'
-                                                                    : 'bg-green-100 text-green-800'
+                                                            ? 'bg-yellow-100 text-yellow-800'
+                                                            : booking.status === 'confirmed'
+                                                                ? 'bg-blue-100 text-blue-800'
+                                                                : 'bg-green-100 text-green-800'
                                                             }`}
                                                     >
                                                         {booking.status.toUpperCase()}
