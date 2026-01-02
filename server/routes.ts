@@ -2,13 +2,13 @@ import type { Express } from "express";
 import { db } from "./db";
 import { bookings } from "../shared/schema";
 import { insertBookingSchema, updateBookingSchema } from "../shared/schema";
-import { eq } from "drizzle-orm";
+import { eq, desc } from "drizzle-orm";
 
 export async function registerRoutes(app: Express): Promise<void> {
-  // GET - Fetch all bookings
+  // GET - Fetch all bookings (newest first)
   app.get("/api/bookings", async (_req, res) => {
     try {
-      const allBookings = await db.select().from(bookings).orderBy(bookings.createdAt);
+      const allBookings = await db.select().from(bookings).orderBy(desc(bookings.createdAt));
       res.json(allBookings);
     } catch (error) {
       console.error("Failed to fetch bookings:", error);

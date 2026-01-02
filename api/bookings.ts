@@ -2,7 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { createClient } from '@libsql/client';
 import { drizzle } from 'drizzle-orm/libsql';
 import { sqliteTable, integer, text } from "drizzle-orm/sqlite-core";
-import { eq } from 'drizzle-orm';
+import { eq, desc } from 'drizzle-orm';
 import { z } from "zod";
 
 // Inline schema definition to avoid module resolution issues
@@ -57,9 +57,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const db = getDb();
 
     try {
-        // GET - Fetch all bookings
+        // GET - Fetch all bookings (newest first)
         if (req.method === 'GET') {
-            const allBookings = await db.select().from(bookings).orderBy(bookings.createdAt);
+            const allBookings = await db.select().from(bookings).orderBy(desc(bookings.createdAt));
             return res.status(200).json(allBookings);
         }
 
