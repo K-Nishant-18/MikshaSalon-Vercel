@@ -20,7 +20,14 @@ export async function buildApp() {
 
   // Vercel rewrite might strip /api prefix
   app.use((req, res, next) => {
-    if (!req.path.startsWith('/api') && req.path.startsWith('/admin')) {
+    // If request route is /health, but we defined /api/health, we need to correct it.
+    // However, we want to be careful not to double-prefix if Vercel DIDN'T strip it.
+    // Simpler approach: define routes as router mounted at /api? 
+    // No, existing structure defines full paths.
+
+    // If path is '/health' and we have '/api/health', rewrite req.url
+    // We assume ALL backend routes should start with /api in our definitions.
+    if (!req.path.startsWith('/api')) {
       req.url = '/api' + req.url;
     }
     next();
