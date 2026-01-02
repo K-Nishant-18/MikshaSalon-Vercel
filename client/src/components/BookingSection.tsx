@@ -54,7 +54,7 @@ export default function BookingSection() {
         status: 'pending'
       };
 
-      await apiRequest('POST', '/api/admin/bookings', bookingData);
+      await apiRequest('POST', '/api/bookings', bookingData);
 
       toast({
         title: "Booking Submitted!",
