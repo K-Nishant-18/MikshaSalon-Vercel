@@ -27,7 +27,7 @@ export default async function handler(req: any, res: any) {
       const id = req.query?.id || req.url?.split("/").pop();
       if (!id) return res.status(400).json({ message: "id required" });
 
-      const user = await storage.getUser(id as string);
+      const user = await storage.getUser(parseInt(id as string, 10));
       if (!user) return res.status(404).json({ message: "not found" });
       // hide password in response
       const { password, ...rest } = user as any;

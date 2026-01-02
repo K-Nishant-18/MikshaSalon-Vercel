@@ -18,7 +18,7 @@ export default async function handler(req: any, res: any) {
       return res.status(401).json({ message: "invalid token" });
     }
 
-    const user = await storage.getUser(payload.id as string);
+    const user = await storage.getUser(parseInt(payload.id, 10));
     if (!user) return res.status(404).json({ message: "user not found" });
     const { password: _p, ...publicUser } = user as any;
     return res.status(200).json({ user: publicUser });
