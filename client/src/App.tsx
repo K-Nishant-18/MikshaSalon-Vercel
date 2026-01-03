@@ -9,6 +9,7 @@ import GalleryPage from "@/pages/Gallery";
 import LoginPage from "@/pages/Login";
 import AdminPage from "@/pages/Admin";
 import NotFound from "@/pages/not-found";
+import Loader from "@/components/Loader";
 
 function Router() {
   return (
